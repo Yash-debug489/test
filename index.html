@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>2026 Surprise</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #2a2a4d, #0d0d1b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  color: #fff;
+}
+
+.glow {
+  position: fixed;
+  inset: -30%;
+  background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 60%);
+  animation: drift 20s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from { transform: translate(-5%, -5%); }
+  to   { transform: translate(5%, 5%); }
+}
+
+.container {
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+p {
+  opacity: 0.75;
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+button {
+  margin: 10px;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+button:hover {
+  transform: scale(1.05);
+}
+
+#cameraBtn { background: #FF6EC7; color: #fff; }
+#nextBtn { background: #6A82FB; color: #fff; }
+
+/* Polaroid frame */
+.polaroid {
+  margin: 20px auto;
+  width: 250px;
+  height: 320px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.polaroid h3 {
+  margin: 10px 0 0 0;
+  font-family: 'Playfair Display', serif;
+  color: #333;
+  font-size: 1rem;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<div class="glow"></div>
+
+<div class="container">
+  <h2>Entering 2026 with the best thing ever…</h2>
+  <p>Wanna see it?</p>
+
+  <div class="polaroid">
+    <video id="cameraFeed" autoplay playsinline></video>
+    <h3>Click "Open Camera" below 📸</h3>
+  </div>
+
+  <button id="cameraBtn">Open Camera</button>
+  <button id="nextBtn" onclick="location.href='page3.html'">Continue</button>
+</div>
+
+<script>
+const cameraBtn = document.getElementById('cameraBtn');
+const video = document.getElementById('cameraFeed');
+
+cameraBtn.addEventListener('click', async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'user' } // front camera
+    });
+    video.srcObject = stream;
+    video.style.display = 'block'; // show camera in polaroid
+    cameraBtn.style.display = 'none'; // hide the button after opening
+  } catch (err) {
+    alert("Cannot access camera 😢, you can still continue!");
+  }
+});
+</script>
+
+</body>
+</html>
