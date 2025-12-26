@@ -5,6 +5,10 @@
 <title>2026 Surprise</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<!-- CAMERA PERMISSION POLICY -->
+<meta name="permissions-policy" content="camera=(self)">
+
 <style>
 body {
   margin: 0;
@@ -105,8 +109,8 @@ video {
   <p>Wanna see it?</p>
 
   <div class="polaroid">
-    <video id="cameraFeed" autoplay playsinline></video>
-    <h3>Click "Open Camera" below 📸</h3>
+    <video id="cameraFeed" autoplay playsinline muted></video>
+    <h3 id="hint">Click "Open Camera" below 📸</h3>
   </div>
 
   <button id="cameraBtn">Open Camera</button>
@@ -114,21 +118,48 @@ video {
 </div>
 
 <script>
-const cameraBtn = document.getElementById('cameraBtn');
-const video = document.getElementById('cameraFeed');
+const cameraBtn = document.getElementById("cameraBtn");
+const video = document.getElementById("cameraFeed");
+const hint = document.getElementById("hint");
 
-cameraBtn.addEventListener('click', async () => {
+async function openCamera() {
   try {
+    // Stop existing streams
+    if (video.srcObject) {
+      video.srcObject.getTracks().forEach(track => track.stop());
+    }
+
     const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'user' } // front camera
+      video: {
+        facingMode: "user",
+        width: { ideal: 1280 },
+        height: { ideal: 720 }
+      },
+      audio: false
     });
+
     video.srcObject = stream;
-    video.style.display = 'block'; // show camera in polaroid
-    cameraBtn.style.display = 'none'; // hide the button after opening
+    video.muted = true;
+    video.setAttribute("playsinline", true);
+    await video.play();
+
+    video.style.display = "block";
+    hint.style.display = "none";
+    cameraBtn.style.display = "none";
+
   } catch (err) {
-    alert("Cannot access camera 😢, you can still continue!");
+    console.error("Camera error:", err);
+    alert(
+      "Camera couldn't open 😢\n\n" +
+      "Make sure:\n" +
+      "• You're on HTTPS\n" +
+      "• Camera permission is allowed\n" +
+      "• No other app is using the camera"
+    );
   }
-});
+}
+
+cameraBtn.addEventListener("click", openCamera);
 </script>
 
 </body>
