@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New message</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #0e0e11, #000);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.85),
+    0 0 0 1px rgba(255,255,255,0.06);
+}
+
+.header {
+  height: 56px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.chat {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+}
+
+.row {
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.row.left { justify-content: flex-start; }
+.row.right { justify-content: flex-end; }
+
+.msg {
+  max-width: 72%;
+  padding: 9px 13px;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  border-radius: 18px;
+}
+
+.left .msg {
+  background: #262626;
+  border-bottom-left-radius: 6px;
+}
+
+.right .msg {
+  background: #3797F0;
+  border-bottom-right-radius: 6px;
+}
+
+.msg a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* typing dots */
+.typing {
+  background: #262626;
+  padding: 8px 12px;
+  border-radius: 18px;
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: #aaa;
+  border-radius: 50%;
+  animation: blink 1.4s infinite both;
+}
+
+.dot:nth-child(2){ animation-delay:.2s }
+.dot:nth-child(3){ animation-delay:.4s }
+
+@keyframes blink {
+  0% { opacity: .2 }
+  20% { opacity: 1 }
+  100% { opacity: .2 }
+}
+
+/* CURSOR */
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  animation: cursorBlink 1s infinite steps(1);
+}
+
+@keyframes cursorBlink {
+  50% { opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+  <div class="header">
+  <a href="profile.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:white;">
+    <img src="her.jpg" class="avatar">
+    <div class="name">Her</div>
+  </a>
+</div>
+
+
+  <div class="chat" id="chat"></div>
+</div>
+
+<script>
+const chat = document.getElementById("chat");
+
+function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+function rand(min,max){ return Math.random()*(max-min)+min; }
+
+function showTyping(){
+  const row = document.createElement("div");
+  row.className = "row left";
+  const box = document.createElement("div");
+  box.className = "typing";
+  box.innerHTML = `<span class="dot"></span><span class="dot"></span><span class="dot"></span>`;
+  row.appendChild(box);
+  chat.appendChild(row);
+  chat.scrollTop = chat.scrollHeight;
+  return row;
+}
+
+async function typeMessage(text, side, html=false){
+  const row = document.createElement("div");
+  row.className = `row ${side}`;
+  const msg = document.createElement("div");
+  msg.className = "msg";
+  row.appendChild(msg);
+  chat.appendChild(row);
+
+  const textNode = document.createTextNode("");
+  const cursor = document.createElement("span");
+  cursor.className = "cursor";
+  cursor.textContent = "|";
+
+  msg.appendChild(textNode);
+  msg.appendChild(cursor);
+
+  let buffer = "";
+
+  for (let ch of text) {
+    buffer += ch;
+
+    if (html) {
+      msg.innerHTML = buffer;
+      msg.appendChild(cursor);
+    } else {
+      textNode.textContent = buffer;
+    }
+
+    chat.scrollTop = chat.scrollHeight;
+
+    if (".,!?".includes(ch)) await sleep(rand(400,650));
+    else if ("😂😌💞👉👈".includes(ch)) await sleep(rand(550,850));
+    else await sleep(rand(70,140));
+  }
+
+  cursor.remove();
+}
+
+(async function convo(){
+
+  await sleep(900);
+  await typeMessage("This year was preety surprising don't u thing?", "right");
+
+  let t = showTyping();
+  await sleep(1300);
+  t.remove();
+  await typeMessage("Haa yrrr....Haam aasman se gir ke khajur me atak gayee...", "left");
+
+  await sleep(900);
+  await typeMessage("Hainaa...tu M se XL ho vii ho gaii and vii merii 206 se jyda hadiya ho gaii thii ak wakt pe [Unglii crush huii thii na😂]", "right");
+
+  t = showTyping();
+  await sleep(1200);
+  t.remove();
+  await typeMessage("Bakwas mat kar", "left");
+
+  await sleep(900);
+  await typeMessage("Hehehe...Waise u know why im so happy....Now, i have the best thing i could have had😌.", "right");
+
+  t = showTyping();
+  await sleep(1200);
+  t.remove();
+  await typeMessage("Mere baree maii baat kr ree hoo naaa.", "left");
+
+  await sleep(900);
+  await typeMessage("Maybe..", "right");
+
+  t = showTyping();
+  await sleep(1100);
+  t.remove();
+  await typeMessage("Maybee!!..fir kya haii😒", "left");
+
+  await sleep(900);
+  await typeMessage("baby👉👈i wanna show u, sabse pehlee at the start of year💞💞....", "right");
+
+  await sleep(900);
+  await typeMessage(`click <a href="nextpage.html">HERE</a>`, "right", true);
+
+})();
+</script>
+
+</body>
+</html>
