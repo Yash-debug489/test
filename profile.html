@@ -17,6 +17,14 @@ body {
   color: #fff;
 }
 
+/* ===== INSTAGRAM WIDTH WRAPPER ===== */
+.insta-wrap {
+  max-width: 420px;
+  margin: 0 auto;
+  background: #111;
+  min-height: 100vh;
+}
+
 /* TOP BAR */
 .topbar {
   display: flex;
@@ -129,69 +137,59 @@ body {
   height: 100%;
   object-fit: cover;
 }
-
-/* BACK */
-.back {
-  display: inline-block;
-  margin: 12px;
-  padding: 8px 12px;
-  border: 1px solid #555;
-  border-radius: 8px;
-  color: #fff;
-  text-decoration: none;
-}
 </style>
 </head>
 
 <body>
 
+<div class="insta-wrap">
 
-<div class="topbar">
-  <div class="username">Yash</div>
-  <div>⋮</div>
-</div>
+  <div class="topbar">
+    <div class="username">Yash</div>
+    <div>⋮</div>
+  </div>
 
-<div class="profile">
-  <img src="pfp.jpg" class="avatar">
-  <div>
-    <div class="stats">
-      <div class="stat"><strong>2</strong> posts</div>
-      <div class="stat"><strong>1</strong> follower</div>
-      <div class="stat"><strong>1</strong> following</div>
+  <div class="profile">
+    <img src="pfp.jpg" class="avatar">
+    <div>
+      <div class="stats">
+        <div class="stat"><strong>2</strong> posts</div>
+        <div class="stat"><strong>1</strong> follower</div>
+        <div class="stat"><strong>1</strong> following</div>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="bio">
-  <div class="name">Her ✨</div>
-  💗 Taken by the girl reading this <br>
-  🧠 <br>
-  📍 In my heart, always<br>
-  🔒 Private memories only
-</div>
-
-<div class="actions">
-  <div class="btn follow">Following</div>
-  <div class="btn message">Message</div>
-</div>
-
-<div class="highlights">
-  <div class="highlight"><div>💌</div>Love</div>
-  <div class="highlight"><div>😂</div>Us</div>
-  <div class="highlight"><div>🧠</div>NEET</div>
-  <div class="highlight"><div>🔒</div>Secrets</div>
-</div>
-
-<div class="grid">
-
-  <!-- POST 1: FOOD SELECTION -->
-  <div class="post" onclick="location.href='food.html'">
-    <img src="food-post.jpg" alt="Food choice">
+  <div class="bio">
+    <div class="name">Her ✨</div>
+    💗 Taken by the girl reading this <br>
+    🧠 <br>
+    📍 In my heart, always<br>
+    🔒 Private memories only
   </div>
 
-  <!-- POST 2: PERIOD RELIEF GIFT -->
-  <div class="post" onclick="location.href='relief.html'">
-    <img src="relief-post.jpg" alt="Period relief gift">
+  <div class="actions">
+    <div class="btn follow">Following</div>
+    <div class="btn message">Message</div>
+  </div>
+
+  <div class="highlights">
+    <div class="highlight"><div>💌</div>Love</div>
+    <div class="highlight"><div>😂</div>Us</div>
+    <div class="highlight"><div>🧠</div>NEET</div>
+    <div class="highlight"><div>🔒</div>Secrets</div>
+  </div>
+
+  <div class="grid">
+    <!-- POST 1 -->
+    <div class="post" onclick="location.href='food.html'">
+      <img src="food-post.jpg" alt="Food choice">
+    </div>
+
+    <!-- POST 2 -->
+    <div class="post" onclick="location.href='relief.html'">
+      <img src="relief-post.jpg" alt="Period relief gift">
+    </div>
   </div>
 
 </div>
