@@ -4,13 +4,11 @@
 <meta charset="UTF-8">
 <title>Just Us 🤍</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <meta name="permissions-policy" content="camera=(self)">
 
 <style>
 * { box-sizing: border-box; }
-
 body {
   margin: 0;
   height: 100vh;
@@ -24,50 +22,62 @@ body {
   color: #4b2a3d;
   overflow: hidden;
 }
-
 .soft-glow {
   position: fixed;
   inset: -30%;
   background: radial-gradient(circle, rgba(255,182,193,0.25), transparent 60%);
   animation: float 18s ease-in-out infinite alternate;
 }
-
 @keyframes float {
   from { transform: translate(-4%, -4%); }
   to   { transform: translate(4%, 4%); }
 }
-
 .container {
   text-align: center;
   z-index: 2;
   padding: 20px;
 }
 
+/* Gift Box */
+.gift-box {
+  width: 120px;
+  height: 120px;
+  background: #ff9a9e;
+  border-radius: 16px;
+  margin: auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(255,154,158,0.35);
+  transition: transform 0.3s ease;
+}
+.gift-box:hover { transform: scale(1.05); }
+
 /* Polaroid */
 .polaroid {
-  margin: auto;
+  margin: 20px auto 0;
   width: 260px;
   height: 340px;
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 20px 40px rgba(255, 120, 160, 0.35);
-  display: flex;
+  display: none;
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.4s ease;
 }
-
-.polaroid:hover {
-  transform: translateY(-6px);
-}
+.polaroid:hover { transform: translateY(-6px); }
 
 .video-wrap {
   width: 100%;
   height: 250px;
   background: #000;
 }
-
 video {
   width: 100%;
   height: 100%;
@@ -83,33 +93,20 @@ video {
   font-size: 1.05rem;
 }
 
-/* Question */
+/* Choice buttons */
 .choice {
   margin-top: 26px;
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
-
-.choice.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
+.choice.show { opacity: 1; transform: translateY(0); }
 .choice p {
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
   margin-bottom: 18px;
 }
-
-/* Buttons */
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-  position: relative;
-}
-
+.buttons { display: flex; justify-content: center; gap: 18px; }
 .buttons button {
   padding: 12px 30px;
   font-size: 1rem;
@@ -119,25 +116,21 @@ video {
   cursor: pointer;
   transition: transform 0.35s ease;
 }
-
-/* YES romantic */
 #yesBtn {
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   color: #5a1e3a;
   box-shadow: 0 0 0 rgba(255,154,158,0.7);
   animation: pulse 2s infinite;
 }
-
 @keyframes pulse {
   0%   { box-shadow: 0 0 0 0 rgba(255,154,158,0.6); }
   70%  { box-shadow: 0 0 0 14px rgba(255,154,158,0); }
   100% { box-shadow: 0 0 0 0 rgba(255,154,158,0); }
 }
-
-/* NO playful */
 #noBtn {
   background: #f2f2f2;
   color: #555;
+  transition: transform 0.3s ease, scale 0.3s ease;
 }
 </style>
 </head>
@@ -148,15 +141,17 @@ video {
 
 <div class="container">
 
+  <div class="gift-box" id="giftBox">🎁</div>
+
   <div class="polaroid" id="polaroid">
     <div class="video-wrap">
       <video id="cameraFeed" autoplay playsinline muted></video>
     </div>
-    <div class="hint" id="hint">Tap to find out 🤍</div>
+    <div class="hint" id="hint">Tap to see 🤍</div>
   </div>
 
   <div class="choice" id="choiceBox">
-    <p>dont u agree i have the best thing ever in this world</p>
+    <p>Don't you agree I have the best thing ever in this world?</p>
     <div class="buttons">
       <button id="yesBtn">YES</button>
       <button id="noBtn">NO</button>
@@ -166,20 +161,25 @@ video {
 </div>
 
 <script>
+const giftBox = document.getElementById("giftBox");
 const polaroid = document.getElementById("polaroid");
 const video = document.getElementById("cameraFeed");
 const hint = document.getElementById("hint");
-
 const choiceBox = document.getElementById("choiceBox");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 
 let cameraOpened = false;
-let yesScale = 1;
-let noScale = 1;
-let dodge = 0;
 
-async function openCamera() {
+// Step 1: Gift box click
+giftBox.addEventListener("click", () => {
+  giftBox.style.display = "none";
+  hint.textContent = "Are you ready to see the best thing I have now?";
+  polaroid.style.display = "flex";
+});
+
+// Step 2: Polaroid click → open camera for 5s
+polaroid.addEventListener("click", async () => {
   if (cameraOpened) return;
 
   try {
@@ -189,12 +189,10 @@ async function openCamera() {
     });
 
     video.srcObject = stream;
+    video.style.display = "block";
     await video.play();
 
-    video.style.display = "block";
-    hint.textContent = "🤍";
     cameraOpened = true;
-    polaroid.style.cursor = "default";
 
     setTimeout(() => {
       stream.getTracks().forEach(track => track.stop());
@@ -206,24 +204,17 @@ async function openCamera() {
   } catch {
     alert("Please allow camera access 🤍");
   }
-}
-
-/* NO dodges + YES grows */
-noBtn.addEventListener("click", () => {
-  yesScale += 0.15;
-  noScale -= 0.1;
-  dodge = dodge === 0 ? 40 : -dodge;
-
-  yesBtn.style.transform = `scale(${yesScale})`;
-  noBtn.style.transform = `scale(${Math.max(noScale,0.45)}) translateX(${dodge}px)`;
 });
 
-/* YES wins */
+// Step 3: YES button → go to next page
 yesBtn.addEventListener("click", () => {
   location.href = "page3.html";
 });
 
-polaroid.addEventListener("click", openCamera);
+// Step 4: NO button → just shrink
+noBtn.addEventListener("click", () => {
+  noBtn.style.transform = "scale(0.8)";
+});
 </script>
 
 </body>
