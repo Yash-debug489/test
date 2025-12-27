@@ -9,7 +9,7 @@ const CHAT = [
   { side: "left",  text: "Maybe.." },
   { side: "right", text: "Maybee!!..fir kya haii😒" },
   { side: "left",  text: "baby👉👈i wanna show u, sabse pehlee at the start of year💞💞...." },
-  { side: "right", text: `click <a href="camera.html">HERE</a>`, html: true },
+  { side: "left", text: `click <a href="camera.html">HERE</a>`, html: true },
 
   // PAGE 2
   { side: "right", text: "😳😳💕cutee thaa yrr" },
