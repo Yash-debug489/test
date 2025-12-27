@@ -1,4 +1,2 @@
-enableProfileClick(false);
-
-preloadMessages(16);   // all previous messages
-// no typing, chat ends
+disableProfileClick();
+playChat(16, 18); // final messages
