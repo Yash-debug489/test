@@ -102,11 +102,14 @@ if (!document.createElement('canvas').getContext) {
 }
 </script>
 
-        <script>
-document.getElementById("icon").addEventListener("click", function () {
-  window.location.href = "page2.html";
+       <script>
+document.addEventListener("click", function (e) {
+  if (e.target && e.target.id === "icon") {
+    window.location.href = "page2.html";
+  }
 });
 </script>
+
 
 </body>
 </html>
