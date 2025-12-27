@@ -14,7 +14,7 @@ function renderInstant(msg) {
   row.className = `row ${msg.side}`;
   const box = document.createElement("div");
   box.className = "msg";
-  msg.html ? box.innerHTML = msg.text : box.textContent = msg.text;
+  box.innerHTML = msg.html ? msg.text : msg.text.replace(/</g,"&lt;").replace(/>/g,"&gt;");
   row.appendChild(box);
   chat.appendChild(row);
   chat.scrollTop = chat.scrollHeight;
@@ -69,36 +69,36 @@ async function typeMessage(text, side, html=false){
 }
 
 /* ---------- CHAT PLAYER ---------- */
-async function playChat(endIndex) {
-  const start = Number(localStorage.getItem("chatIndex") || 0);
-
+async function playChat(startIndex, endIndex) {
   // render old messages instantly
-  for (let i = 0; i < start; i++) {
+  for (let i = 0; i < startIndex; i++) {
     renderInstant(CHAT[i]);
   }
 
-  // type new messages
-  for (let i = start; i < endIndex; i++) {
+  // type messages for this page
+  for (let i = startIndex; i < endIndex; i++) {
     if (CHAT[i].side === "right") {
       const t = showTyping("right");
       await sleep(rand(900,1200));
       t.remove();
     }
-    await typeMessage(CHAT[i].text, CHAT[i].side, CHAT[i].html);
+    await typeMessage(CHAT[i].text, CHAT[i].side, CHAT[i].html || false);
   }
 
   localStorage.setItem("chatIndex", endIndex);
 }
 
 /* ---------- PROFILE CONTROL ---------- */
-function enableProfileClick(url) {
+function enableProfileClick(url = "profile.html") {
   const p = document.getElementById("profileTrigger");
+  if (!p) return;
   p.classList.add("clickable");
   p.onclick = () => location.href = url;
 }
 
 function disableProfileClick() {
   const p = document.getElementById("profileTrigger");
+  if (!p) return;
   p.classList.remove("clickable");
   p.onclick = null;
 }
