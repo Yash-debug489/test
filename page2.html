@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New start together 🤍</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #0e0e11, #000);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+.header {
+  height: 56px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile.clickable {
+  cursor: pointer;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.chat {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+}
+
+.row { display: flex; margin-bottom: 6px; }
+.row.left { justify-content: flex-start; }
+.row.right { justify-content: flex-end; }
+
+.msg {
+  max-width: 72%;
+  padding: 9px 13px;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  border-radius: 18px;
+}
+
+.left .msg { background: #262626; border-bottom-left-radius: 6px; }
+.right .msg { background: #3797F0; border-bottom-right-radius: 6px; }
+
+.typing {
+  background: #262626;
+  padding: 8px 12px;
+  border-radius: 18px;
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: #aaa;
+  border-radius: 50%;
+  animation: blink 1.4s infinite both;
+}
+
+@keyframes blink {
+  0% { opacity: .2 }
+  20% { opacity: 1 }
+  100% { opacity: .2 }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+  <div class="header">
+    <div id="profileTrigger" class="profile">
+      <img src="pfp.jpg" class="avatar">
+      <div class="name">Yash</div>
+    </div>
+  </div>
+
+  <div class="chat" id="chat"></div>
+</div>
+
+<audio id="typingSound" src="typing.mp3"></audio>
+<audio id="sendSound" src="send.mp3"></audio>
+
+<script src="js/chatData.js"></script>
+<script src="js/chatRenderer.js"></script>
+<script src="js/page2.js"></script> <!-- THIS LINE CHANGES -->
+</body>
+</html>
