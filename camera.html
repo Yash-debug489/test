@@ -9,6 +9,7 @@
 
 <style>
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   height: 100vh;
@@ -22,6 +23,7 @@ body {
   color: #4b2a3d;
   overflow: hidden;
 }
+
 .soft-glow {
   position: fixed;
   inset: -30%;
@@ -32,35 +34,31 @@ body {
   from { transform: translate(-4%, -4%); }
   to   { transform: translate(4%, 4%); }
 }
+
 .container {
   text-align: center;
   z-index: 2;
   padding: 20px;
 }
 
-/* Gift Box */
-.gift-box {
-  width: 120px;
-  height: 120px;
-  background: #ff9a9e;
-  border-radius: 16px;
-  margin: auto;
+/* Gift Image */
+#giftBox {
+  width: 220px;
+  max-width: 90vw;
+  display: block;
+  margin: 40px auto 0;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #fff;
-  box-shadow: 0 10px 20px rgba(255,154,158,0.35);
   transition: transform 0.3s ease;
 }
-.gift-box:hover { transform: scale(1.05); }
+#giftBox:hover {
+  transform: scale(1.05);
+}
 
 /* Polaroid */
 .polaroid {
   margin: 20px auto 0;
   width: 260px;
+  max-width: 90vw;
   height: 340px;
   background: #fff;
   border-radius: 14px;
@@ -69,10 +67,12 @@ body {
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.4s ease;
+  transform: scale(0);
+  transition: transform 0.5s ease;
 }
-.polaroid:hover { transform: translateY(-6px); }
-
+.polaroid.show {
+  transform: scale(1);
+}
 .video-wrap {
   width: 100%;
   height: 250px;
@@ -85,7 +85,6 @@ video {
   display: none;
   transform: scaleX(-1);
 }
-
 .hint {
   padding: 18px 10px;
   font-family: 'Playfair Display', serif;
@@ -130,7 +129,6 @@ video {
 #noBtn {
   background: #f2f2f2;
   color: #555;
-  transition: transform 0.3s ease, scale 0.3s ease;
 }
 </style>
 </head>
@@ -141,8 +139,10 @@ video {
 
 <div class="container">
 
-  <div class="gift-box" id="giftBox">🎁</div>
+  <!-- Gift Image -->
+  <img src="cat-gift.png" id="giftBox" alt="Cat Gift" />
 
+  <!-- Polaroid -->
   <div class="polaroid" id="polaroid">
     <div class="video-wrap">
       <video id="cameraFeed" autoplay playsinline muted></video>
@@ -150,6 +150,7 @@ video {
     <div class="hint" id="hint">Tap to see 🤍</div>
   </div>
 
+  <!-- Choice Buttons -->
   <div class="choice" id="choiceBox">
     <p>Don't you agree I have the best thing ever in this world?</p>
     <div class="buttons">
@@ -170,15 +171,18 @@ const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 
 let cameraOpened = false;
+let yesScale = 1;
+let noScale = 1;
 
 // Step 1: Gift box click
 giftBox.addEventListener("click", () => {
   giftBox.style.display = "none";
   hint.textContent = "Are you ready to see the best thing I have now?";
   polaroid.style.display = "flex";
+  setTimeout(() => polaroid.classList.add("show"), 50); // pop-out animation
 });
 
-// Step 2: Polaroid click → open camera for 5s
+// Step 2: Polaroid click → open camera for 5s (camera stays on)
 polaroid.addEventListener("click", async () => {
   if (cameraOpened) return;
 
@@ -191,12 +195,9 @@ polaroid.addEventListener("click", async () => {
     video.srcObject = stream;
     video.style.display = "block";
     await video.play();
-
     cameraOpened = true;
 
     setTimeout(() => {
-      stream.getTracks().forEach(track => track.stop());
-      video.style.display = "none";
       hint.textContent = "✨";
       choiceBox.classList.add("show");
     }, 5000);
@@ -211,9 +212,12 @@ yesBtn.addEventListener("click", () => {
   location.href = "page3.html";
 });
 
-// Step 4: NO button → just shrink
+// Step 4: NO button → shrink and enlarge YES
 noBtn.addEventListener("click", () => {
-  noBtn.style.transform = "scale(0.8)";
+  noScale = Math.max(noScale - 0.05, 0.5);
+  yesScale += 0.05;
+  noBtn.style.transform = `scale(${noScale})`;
+  yesBtn.style.transform = `scale(${yesScale})`;
 });
 </script>
 
