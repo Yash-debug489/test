@@ -1,4 +1,2 @@
-enableProfileClick(true);
-
-preloadMessages(10);   // page1 fully visible
-startTypingFrom(10);  // continue typing
+enableProfileClick("profile.html");
+playChat(10, 14); // continue from page1 messages
