@@ -104,6 +104,30 @@ body {
   20% { opacity: 1 }
   100% { opacity: .2 }
 }
+
+/* 🌙 FINAL CONTINUE BUTTON */
+.final-wrap {
+  padding: 16px;
+  display: none;
+  justify-content: center;
+  animation: fadeUp 1.2s ease forwards;
+}
+
+.final-btn {
+  padding: 14px 22px;
+  font-size: 0.95rem;
+  border-radius: 22px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #ff5fa2, #ff2f6d);
+  box-shadow: 0 12px 35px rgba(255, 47, 109, 0.4);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 </style>
 </head>
 
@@ -118,6 +142,13 @@ body {
   </div>
 
   <div class="chat" id="chat"></div>
+
+  <!-- 💖 FINAL BUTTON -->
+  <div class="final-wrap" id="finalWrap">
+    <button class="final-btn" onclick="enter2026()">
+      ✨ Enter 2026 — Click to continue ✨
+    </button>
+  </div>
 </div>
 
 <audio id="typingSound" src="typing.mp3"></audio>
@@ -125,6 +156,22 @@ body {
 
 <script src="js/chatData.js"></script>
 <script src="js/chatRenderer.js"></script>
-<script src="js/page4.js"></script> <!-- THIS LINE CHANGES -->
+
+<script>
+  /* 🕊️ Called AFTER chat finishes */
+  function showFinalButton() {
+    document.getElementById("finalWrap").style.display = "flex";
+  }
+
+  function enter2026() {
+    window.location.href = "index.html";
+  }
+
+  /* 🔍 Detect when chat is done */
+  // Call this at the END of your chatRenderer logic
+  window.addEventListener("chatFinished", showFinalButton);
+</script>
+
+<script src="js/page4.js"></script>
 </body>
 </html>
