@@ -83,6 +83,11 @@ async function playChat(startIndex, endIndex) {
       t.remove();
     }
     await typeMessage(CHAT[i].text, CHAT[i].side, CHAT[i].html || false);
+
+     // ✅ IF THIS IS THE LAST MESSAGE OF THE PAGE
+  if (i === endIndex - 1) {
+    showEndButton();
+  }
   }
 
   localStorage.setItem("chatIndex", endIndex);
@@ -102,3 +107,8 @@ function disableProfileClick() {
   p.classList.remove("clickable");
   p.onclick = null;
 }
+function showEndButton() {
+  const btn = document.getElementById("endButton");
+  if (btn) btn.style.display = "block";
+}
+
