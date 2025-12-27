@@ -145,8 +145,18 @@ body {
 
   <div class="chat" id="chat"></div>
 </div>
+<audio id="typingSound" src="typing.mp3" preload="auto"></audio>
+<audio id="sendSound" src="send.mp3" preload="auto"></audio>
 
 <script>
+
+
+  const typingSound = document.getElementById("typingSound");
+const sendSound = document.getElementById("sendSound");
+
+typingSound.volume = 0.15; // subtle
+sendSound.volume = 0.4;
+
 const chat = document.getElementById("chat");
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
@@ -181,6 +191,15 @@ async function typeMessage(text, side, html=false){
   msg.appendChild(cursor);
 
   let buffer = "";
+  let typingInterval;
+
+  // start typing sound loop
+  typingSound.currentTime = 0;
+  typingSound.play();
+  typingInterval = setInterval(() => {
+    typingSound.currentTime = 0;
+    typingSound.play();
+  }, 120);
 
   for (let ch of text) {
     buffer += ch;
@@ -199,8 +218,17 @@ async function typeMessage(text, side, html=false){
     else await sleep(rand(70,140));
   }
 
+  // stop typing sound
+  clearInterval(typingInterval);
+  typingSound.pause();
+
   cursor.remove();
+
+  // send pop
+  sendSound.currentTime = 0;
+  sendSound.play();
 }
+
 
 (async function convo(){
 
