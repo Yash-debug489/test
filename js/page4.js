@@ -1,1 +1,2 @@
+disableProfileClick();
 playChat(18);
