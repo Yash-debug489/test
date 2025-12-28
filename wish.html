@@ -9,6 +9,30 @@
 
 <style>
 
+  /* SIDE BY SIDE CIRCULAR IMAGES */
+.image-block.duo {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 36px 0;
+}
+
+.circle-img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(255,105,135,0.3);
+}
+
+/* Desktop scaling only */
+@media (min-width: 768px) {
+  .circle-img {
+    width: 180px;
+    height: 180px;
+  }
+}
+
 
   /* ===== DESKTOP / PC VERSION ===== */
 @media (min-width: 900px) {
@@ -165,10 +189,11 @@ body {
     <p>Slow down. Take your time.</p>
   </div>
 
-  <div class="image-block">
-    <img src="images/wish1.jpg" alt="us">
-    <img src="images/wish2.jpg" class="small-doodle">
-  </div>
+ <div class="image-block duo">
+  <img src="images/wish1.jpg" alt="us" class="circle-img">
+  <img src="images/wish2.jpg" alt="us" class="circle-img">
+</div>
+
 
   <div class="note">
     I don’t know when it started exactly.<br>
