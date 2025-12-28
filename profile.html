@@ -17,7 +17,7 @@ body {
   color: #fff;
 }
 
-/* ===== INSTAGRAM WIDTH WRAPPER ===== */
+/* ===== INSTAGRAM WIDTH ===== */
 .insta-wrap {
   max-width: 420px;
   margin: 0 auto;
@@ -28,17 +28,17 @@ body {
 /* TOP BAR */
 .topbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 14px;
   border-bottom: 1px solid #333;
 }
-.topbar .username {
+.username {
   font-weight: 600;
   font-size: 1.1rem;
 }
 
-/* PROFILE HEADER */
+/* PROFILE */
 .profile {
   display: flex;
   gap: 16px;
@@ -60,7 +60,6 @@ body {
 }
 .stat strong {
   display: block;
-  font-size: 1rem;
 }
 
 /* BIO */
@@ -125,17 +124,107 @@ body {
 }
 
 .post {
-  background: #222;
   aspect-ratio: 1 / 1;
-  cursor: pointer;
+  background: #222;
   position: relative;
+  cursor: pointer;
 }
 
-.post img,
-.post video {
+.post img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* LOCK OVERLAY */
+.locked::after {
+  content: "🔒";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: rgba(0,0,0,0.55);
+}
+
+/* ===== PASSWORD SHEET ===== */
+#lockSheet {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  align-items: flex-end;
+  z-index: 999;
+}
+
+.sheet {
+  background: #1a1a1a;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 18px 18px 0 0;
+  padding: 16px;
+  animation: slideUp 0.3s ease;
+  position: relative;
+}
+
+.handle {
+  width: 40px;
+  height: 4px;
+  background: #444;
+  border-radius: 999px;
+  margin: 0 auto 14px;
+}
+
+.sheet-close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 1.2rem;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.sheet h3 {
+  margin: 6px 0 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.sheet input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+#pwdError {
+  display: none;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #ff4d4d;
+}
+
+.unlock-btn {
+  margin-top: 14px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 999px;
+  border: none;
+  background: #0095f6;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }
 </style>
 </head>
@@ -163,7 +252,6 @@ body {
   <div class="bio">
     <div class="name">Her ✨</div>
     💗 Taken by the girl reading this <br>
-    🧠 <br>
     📍 In my heart, always<br>
     🔒 Private memories only
   </div>
@@ -176,23 +264,62 @@ body {
   <div class="highlights">
     <div class="highlight"><div>💌</div>Love</div>
     <div class="highlight"><div>😂</div>Us</div>
-    <div class="highlight"><div>🧠</div>NEET</div>
-    <div class="highlight"><div>🔒</div>Secrets</div>
+    <div class="highlight"><div>🔒</div>Private</div>
   </div>
 
   <div class="grid">
     <!-- POST 1 -->
     <div class="post" onclick="location.href='page3.html'">
-      <img src="food-post.jpg" alt="Food choice">
+      <img src="food-post.jpg">
     </div>
 
-    <!-- POST 2 -->
-    <div class="post" onclick="location.href='food.html'">
-      <img src="relief-post.jpg" alt="Period relief gift">
+    <!-- POST 2 LOCKED -->
+    <div class="post locked" onclick="openLock()">
+      <img src="relief-post.jpg">
     </div>
   </div>
 
 </div>
+
+<!-- PASSWORD SHEET -->
+<div id="lockSheet">
+  <div class="sheet">
+    <div class="handle"></div>
+    <div class="sheet-close" onclick="closeLock()">✕</div>
+
+    <h3>Enter password</h3>
+    <input type="text" id="pwd" placeholder="Password">
+    <div id="pwdError">Post1 mai password haii</div>
+
+    <button class="unlock-btn" onclick="checkPwd()">Unlock</button>
+  </div>
+</div>
+
+<script>
+function openLock() {
+  document.getElementById("lockSheet").style.display = "flex";
+  document.getElementById("pwd").value = "";
+  document.getElementById("pwdError").style.display = "none";
+}
+
+function closeLock() {
+  document.getElementById("lockSheet").style.display = "none";
+}
+
+function checkPwd() {
+  const pwd = document.getElementById("pwd").value.trim().toLowerCase();
+  if (pwd === "us4life") {
+    window.location.href = "food.html";
+  } else {
+    document.getElementById("pwdError").style.display = "block";
+  }
+}
+
+/* tap outside to close */
+document.getElementById("lockSheet").addEventListener("click", e => {
+  if (e.target.id === "lockSheet") closeLock();
+});
+</script>
 
 </body>
 </html>
