@@ -1,115 +1,145 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<script src="https://kit.fontawesome.com/a14ae32021.js" crossorigin="anonymous"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>This one is for my Varchhu</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 🤍</title>
 
-<style type="text/css">
-@font-face {
-	font-family: digit;
-	src: url('digital-7_mono.ttf') format("truetype");
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(180deg, #fff1f5, #ffe4ec);
+  color: #4a1c2f;
+}
+
+.wrapper {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 36px 20px 60px;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+/* IMAGE BLOCKS */
+.image-block {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.image-block img {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(255,105,135,0.25);
+}
+
+.small-doodle {
+  width: 80px;
+  margin: 14px auto;
+  opacity: 0.85;
+}
+
+/* TEXT NOTES */
+.note {
+  background: rgba(255,255,255,0.65);
+  border-radius: 18px;
+  padding: 22px;
+  margin: 28px 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* POLAROID FEEL */
+.polaroid {
+  background: #fff;
+  padding: 12px 12px 18px;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(255,105,135,0.3);
+  margin: 30px 0;
+}
+
+.polaroid img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* CTA */
+.continue {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.continue a {
+  display: inline-block;
+  padding: 14px 36px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff9a9e, #fecfdf);
+  color: #3a1023;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 14px 35px rgba(255,154,158,0.45);
 }
 </style>
-<link href="css/default.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/garden.js"></script>
-<script type="text/javascript" src="js/functions.js"></script>
-
 </head>
 
 <body>
 
-<div id="mainDiv">
-	<div id="content">
-		<div id="code">
-			<span class="comments">/**</span><br />
-			<span class="space"/><span class="comments">*THE CODE OF LOVE</span><br />
-			<span class="space"/><span class="comments">*/</span><br />
-			Hey Girl !<br />
-			Do you remember the day we first met?<br />
-			<span class="comments">// The ET-LAB Friday. </span><br />
-			Since that day a spark begun;<br />
-			<span class="comments">// Your face Your Voice Your Words.</span><br />
-			Your everything got imprinted in my heart;<br />
-			As the time went on;<br />
-			The Bond grew stronger and stronger;<br />
-			Journey from Infatuation to Love;<br />
-			We have traveled a long way together;<br />
-			There have been fights ;<br />
-			<span class="comments">// And I'm sure there will be more.</span><br />
-			But our Bond will always grow back Stronger;<br />
-			<br>
-			<br>
-			All I want to say is:<br />
-			Baby, I will love you forever;<br />
-			<br>
-			<br>
-			Now if you want to continue, press the heart below<br />
-<br>
-<span id="heartspan">
-<i class="fas fa-heart" id="icon"></i>
-</span>
+<div class="wrapper">
 
-		</div>
-		<div id="loveHeart">
-			<canvas id="garden"></canvas>
-			<div id="words">
-				<div id="messages">
-					वर्षा ऋतु FOREVER
-					<div id="elapseClock"></div>
-				</div>
-				<div id="loveu">
-					I LOVE YOU SO MUCH<br/>
-					<div class="signature">- RITVIK</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="hero">
+    <h1>This one is for you 🤍</h1>
+    <p>Slow down. Take your time.</p>
+  </div>
+
+  <div class="image-block">
+    <img src="images/us-1.jpg" alt="us">
+    <img src="images/doodle-heart.png" class="small-doodle">
+  </div>
+
+  <div class="note">
+    I don’t know when it started exactly.<br>
+    But somewhere between small talks,<br>
+    shared silences, and random smiles —<br>
+    you became home to me.
+  </div>
+
+  <div class="polaroid">
+    <img src="images/us-2.jpg" alt="memory">
+  </div>
+
+  <div class="note">
+    With you, even ordinary days feel softer.<br>
+    And somehow, everything makes a little more sense.
+  </div>
+
+  <div class="image-block">
+    <img src="images/doodle-stars.png" class="small-doodle">
+  </div>
+
+  <div class="continue">
+    <a href="page2.html">Continue →</a>
+  </div>
+
 </div>
-
-<script type="text/javascript">
-var offsetX = $("#loveHeart").width() / 2;
-var offsetY = $("#loveHeart").height() / 2 - 55;
-var together = new Date();
-together.setFullYear(2016, 8, 5);
-together.setHours(16);
-together.setMinutes(30);
-together.setSeconds(0);
-together.setMilliseconds(0);
-
-if (!document.createElement('canvas').getContext) {
-	var msg = document.createElement("div");
-	msg.id = "errorMsg";
-	msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+"; 
-	document.body.appendChild(msg);
-	$("#code").css("display", "none")
-	$("#copyright").css("position", "absolute");
-	$("#copyright").css("bottom", "10px");
-	document.execCommand("stop");
-} else {
-	setTimeout(function () {
-		startHeartAnimation();
-	}, 5000);
-
-	timeElapse(together);
-	setInterval(function () {
-		timeElapse(together);
-	}, 500);
-
-	adjustCodePosition();
-	$("#code").typewriter();
-}
-</script>
-
-       <script>
-document.addEventListener("click", function (e) {
-  if (e.target && e.target.id === "icon") {
-    window.location.href = "page2.html";
-  }
-});
-</script>
-
 
 </body>
 </html>
