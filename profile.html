@@ -17,6 +17,34 @@ body {
   color: #fff;
 }
 
+
+  #easterModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#easterModal img {
+  max-width: 85%;
+  max-height: 75%;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 1.5rem;
+  color: #fff;
+  opacity: 0.85;
+  cursor: pointer;
+}
+
 /* ===== INSTAGRAM WIDTH ===== */
 .insta-wrap {
   max-width: 420px;
@@ -261,11 +289,23 @@ body {
     <div class="btn message">Message</div>
   </div>
 
-  <div class="highlights">
-    <div class="highlight"><div>💑</div>US</div>
-    <div class="highlight"><div>♾️</div>FOR</div>
-    <div class="highlight"><div>💍</div>LIFE</div>
+ <div class="highlights">
+  <div class="highlight" onclick="openEaster('us.jpg')">
+    <div>💑</div>
+    US
   </div>
+
+  <div class="highlight" onclick="openEaster('for.jpg')">
+    <div>♾️</div>
+    FOR
+  </div>
+
+  <div class="highlight" onclick="openEaster('life.jpg')">
+    <div>💍</div>
+    LIFE
+  </div>
+</div>
+
 
   <div class="grid">
     <!-- POST 1 -->
@@ -295,6 +335,12 @@ body {
   </div>
 </div>
 
+
+  <div id="easterModal">
+  <span class="closeBtn" onclick="closeEaster()">✕</span>
+  <img id="easterImg" src="">
+</div>
+
 <script>
 function openLock() {
   document.getElementById("lockSheet").style.display = "flex";
@@ -319,6 +365,15 @@ function checkPwd() {
 document.getElementById("lockSheet").addEventListener("click", e => {
   if (e.target.id === "lockSheet") closeLock();
 });
+
+  function openEaster(img) {
+  document.getElementById("easterImg").src = img;
+  document.getElementById("easterModal").style.display = "flex";
+}
+
+function closeEaster() {
+  document.getElementById("easterModal").style.display = "none";
+}
 </script>
 
 </body>
