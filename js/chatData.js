@@ -22,7 +22,7 @@ const CHAT = [
   { side: "left",  text: "okayy..waise password for post2 is - us4life" },
 
   // PAGE 4
-  { side: "left",  text: "The website is over noww, but we're just starting" },
+  { side: "left",  text: "The website is over noww, but we're just beginning" },
   { side: "left",  text: "Happy new year, my love❤️ and Happy new year to us!!" }
 ];
 
