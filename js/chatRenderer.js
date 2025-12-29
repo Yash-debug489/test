@@ -8,6 +8,23 @@ sendSound.volume = 0.4;
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 function rand(min,max){ return Math.random()*(max-min)+min; }
 
+let audioUnlocked = false;
+
+function unlockAudio() {
+  if (audioUnlocked) return;
+
+  typingSound.muted = true;
+  typingSound.play().then(() => {
+    typingSound.pause();
+    typingSound.currentTime = 0;
+    typingSound.muted = false;
+    audioUnlocked = true;
+  }).catch(() => {});
+}
+
+document.body.addEventListener("click", unlockAudio, { once: true });
+
+
 /* ---------- INSTANT RENDER ---------- */
 function renderInstant(msg) {
   const row = document.createElement("div");
@@ -44,12 +61,10 @@ async function typeMessage(text, side, html=false){
 
   let buffer = "";
   typingSound.currentTime = 0;
-  typingSound.play();
-
-  const interval = setInterval(() => {
-    typingSound.currentTime = 0;
-    typingSound.play();
-  }, 120);
+ 
+typingSound.currentTime = 0;
+typingSound.loop = true;
+typingSound.play();
 
   for (let ch of text) {
     buffer += ch;
@@ -61,7 +76,7 @@ async function typeMessage(text, side, html=false){
     else await sleep(rand(70,140));
   }
 
-  clearInterval(interval);
+ 
   typingSound.pause();
 
   sendSound.currentTime = 0;
