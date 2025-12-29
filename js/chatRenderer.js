@@ -2,7 +2,7 @@ const chat = document.getElementById("chat");
 const typingSound = document.getElementById("typingSound");
 const sendSound = document.getElementById("sendSound");
 
-typingSound.volume = 0.15;
+typingSound.volume = 0.4;
 sendSound.volume = 0.4;
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
