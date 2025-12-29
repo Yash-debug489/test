@@ -18,7 +18,7 @@ const CHAT = [
   { side: "left",  text: "haa meri profile pic pe click karo👉👈" },
 
   // PAGE 3
-  { side: "left",  text: "hehe, its me again......\nI know i can't feel period cramps myself...but i hate it that u have to go through it every monthh..\nSO i ordered u EVA HEATING PAD i hope it makes u feel a little more comfortable❤️\nI know abhii unclee haii😭, i didn't knew jab order kiyaa thaa..it will get delivered aj 1 jan ko hiii i will get it placed at the usual spot fir text ya call u...you can take it whenever you feel comfortable" },
+  { side: "left",  text: "hehe, its me again......\nWaise i wanted to tell u kii i know i can't feel period cramps myself...but i hate it that u have to go through it every monthh..\nSO i ordered u EVA PERIOD HEATING PAD i hope it makes u feel a little more comfortable❤️\nI know abhii unclee haii😭, i didn't knew jab order kiyaa thaa..it will get delivered aj 1 jan ko hiii, i will get it placed at the usual spot fir text ya call krdunga...you can take it whenever you feel comfortable" },
   { side: "left",  text: "okayy..waise password for post2 is - us4life" },
 
   // PAGE 4
