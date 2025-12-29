@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>FOR U❤️</title>
+<title>U❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <meta name="permissions-policy" content="camera=(self)">
@@ -182,11 +182,11 @@ video {
       <img src="cat2.jpg" id="polaroidPreview" alt="Cute cat preview">
       <video id="cameraFeed" autoplay playsinline muted></video>
     </div>
-    <div class="hint" id="hint">✨ Tap to see the magic ✨</div>
+    <div class="hint" id="hint">✨ Tap to see magic ✨</div>
   </div>
 
   <div class="choice" id="choiceBox">
-    <p>Don't you agree I have the best thing ever in this world?</p>
+    <p>Don't you agree I have the best thing ever in this world😌?</p>
     <div class="buttons">
       <button id="yesBtn">YES</button>
       <button id="noBtn">NO</button>
@@ -221,7 +221,7 @@ function spawnHeart() {
 // Step 1: Gift box click
 giftBox.addEventListener("click", () => {
   giftBox.style.display = "none";
-  hint.textContent = "Are you ready to see the best thing I have now?";
+  hint.textContent = "Tayaar hoo dekhnee ke liyeee...I'm entering 2026 with what";
   polaroid.style.display = "flex";
   setTimeout(() => polaroid.classList.add("show"), 50); // pop-out animation
 });
@@ -245,13 +245,13 @@ polaroid.addEventListener("click", async () => {
 
     // Show choice buttons after 5s
     setTimeout(() => {
-      hint.textContent = "✨ Ready for the surprise? ✨";
+      hint.textContent = "😌pyaraa haii naa";
       choiceBox.classList.add("show");
       clearInterval(heartInterval);
-    }, 5000);
+    }, 2000);
 
   } catch {
-    alert("Please allow camera access 🤍");
+    alert("one small permission-\nI wanna show u the best part of 2026🤍");
   }
 });
 
