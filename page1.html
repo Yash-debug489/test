@@ -19,6 +19,39 @@ body {
   justify-content: center;
   align-items: center;
 }
+  /* QUICK REPLY OVERLAY */
+#quickReplyOverlay {
+  position: absolute;
+  bottom: 18px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  z-index: 20;
+}
+
+#quickReplyOverlay button {
+  padding: 9px 18px;
+  border-radius: 18px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#quickReplyOverlay button:hover {
+  background: #262626;
+}
+.msg a {
+  visibility: hidden;
+}
+#quickReplyOverlay[style*="display: none"] ~ .app .msg a {
+  visibility: visible;
+}
+
 
 .app {
   width: 100%;
@@ -119,6 +152,16 @@ body {
 
   <div class="chat" id="chat"></div>
 </div>
+
+  <div id="quickReplyOverlay">
+  <button onclick="this.parentElement.style.display='none'">
+    Yes
+  </button>
+  <button onclick="this.parentElement.style.display='none'">
+    Always
+  </button>
+</div>
+
 
 <audio id="typingSound" src="typing.mp4"></audio>
 <audio id="sendSound" src="send.mp3"></audio>
