@@ -39,17 +39,6 @@ body {
   color: #fff;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-#quickReplyOverlay button:hover {
-  background: #262626;
-}
-.msg a {
-  visibility: hidden;
-}
-#quickReplyOverlay[style*="display: none"] ~ .app .msg a {
-  visibility: visible;
 }
 
 
@@ -153,14 +142,11 @@ body {
   <div class="chat" id="chat"></div>
 </div>
 
-  <div id="quickReplyOverlay">
-  <button onclick="this.parentElement.style.display='none'">
-    Yes
-  </button>
-  <button onclick="this.parentElement.style.display='none'">
-    Always
-  </button>
+ <div id="quickReplyOverlay" style="display:none;">
+  <button>Yes</button>
+  <button>Always</button>
 </div>
+
 
 
 <audio id="typingSound" src="typing.mp4"></audio>
