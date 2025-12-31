@@ -19,6 +19,36 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+  #nyOverlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, #0e0e11, #000);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  transition: opacity 1s ease;
+}
+
+#nyOverlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nyText {
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+
+#nyTimer {
+  font-size: 2.8rem;
+  font-weight: 500;
+}
+
   /* QUICK REPLY OVERLAY */
 #quickReplyOverlay {
   position: absolute;
@@ -130,6 +160,12 @@ body {
 </head>
 
 <body>
+  <!-- NEW YEAR COUNTDOWN OVERLAY -->
+<div id="nyOverlay">
+  <div class="nyText">New Year in</div>
+  <div id="nyTimer">00:00:00</div>
+</div>
+
 
 <div class="app">
   <div class="header">
@@ -155,5 +191,41 @@ body {
 <script src="js/chatData.js"></script>
 <script src="js/chatRenderer.js"></script>
 <script src="js/page1.js"></script> <!-- THIS LINE CHANGES -->
+
+  <script>
+(function () {
+  const overlay = document.getElementById("nyOverlay");
+  const timerEl = document.getElementById("nyTimer");
+
+  // Local New Year midnight
+  const now = new Date();
+  const newYear = new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0);
+
+  function updateTimer() {
+    const diff = newYear - new Date();
+
+    if (diff <= 0) {
+      timerEl.textContent = "🎉 Happy New Year 🎉";
+      setTimeout(() => overlay.classList.add("hidden"), 800);
+      setTimeout(() => overlay.remove(), 1800);
+      clearInterval(interval);
+      return;
+    }
+
+    const h = Math.floor(diff / (1000 * 60 * 60));
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    timerEl.textContent =
+      String(h).padStart(2, "0") + ":" +
+      String(m).padStart(2, "0") + ":" +
+      String(s).padStart(2, "0");
+  }
+
+  updateTimer();
+  const interval = setInterval(updateTimer, 1000);
+})();
+</script>
+
 </body>
 </html>
